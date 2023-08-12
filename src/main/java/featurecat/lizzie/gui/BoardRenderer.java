@@ -292,6 +292,7 @@ public class BoardRenderer {
       drawStarPoints(g);
 
       // Draw coordinates if enabled
+      final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       if (showCoordinates()) {
         g.setColor(Color.BLACK);
         for (int i = 0; i < Board.boardWidth; i++) {
@@ -300,7 +301,7 @@ public class BoardRenderer {
               x + scaledMarginWidth + squareWidth * i,
               y + scaledMarginHeight / 3,
               MainFrame.uiFont,
-              Board.asName(i),
+              Character.toString(alphabet.charAt(i)),
               stoneRadius * 4 / 5,
               stoneRadius);
           if (!Lizzie.config.showNameInBoard
@@ -312,7 +313,7 @@ public class BoardRenderer {
                 x + scaledMarginWidth + squareWidth * i,
                 y - scaledMarginHeight / 3 + boardHeight,
                 MainFrame.uiFont,
-                Board.asName(i),
+                Integer.toString(i + 1),
                 stoneRadius * 4 / 5,
                 stoneRadius);
           }
@@ -323,7 +324,8 @@ public class BoardRenderer {
               x + scaledMarginWidth / 3,
               y + scaledMarginHeight + squareHeight * i,
               MainFrame.uiFont,
-              "" + (Board.boardHeight <= 25 ? (Board.boardHeight - i) : (i + 1)),
+              Character.toString(alphabet.charAt(i)),
+              // "" + (Board.boardHeight <= 25 ? (Board.boardHeight - i) : (i + 1)),
               stoneRadius * 4 / 5,
               stoneRadius);
           drawString(
@@ -331,7 +333,8 @@ public class BoardRenderer {
               x - scaledMarginWidth / 3 + boardWidth,
               y + scaledMarginHeight + squareHeight * i,
               MainFrame.uiFont,
-              "" + (Board.boardHeight <= 25 ? (Board.boardHeight - i) : (i + 1)),
+              Integer.toString(i + 1),
+              // "" + (Board.boardHeight <= 25 ? (Board.boardHeight - i) : (i + 1)),
               stoneRadius * 4 / 5,
               stoneRadius);
         }

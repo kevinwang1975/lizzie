@@ -672,6 +672,7 @@ public class SGFParser {
         if (Stone.BLACK.equals(data.lastMoveColor)) stone = "B";
         else if (Stone.WHITE.equals(data.lastMoveColor)) stone = "W";
 
+        builder.append("\n");
         builder.append(";");
         if (!data.dummy) {
           builder.append(
@@ -681,7 +682,7 @@ public class SGFParser {
         }
 
         // Node properties
-        builder.append(data.propertiesString());
+        //        builder.append(data.propertiesString());
 
         if (Lizzie.config.appendWinrateToComment) {
           // Append the winrate to the comment of sgf
@@ -694,9 +695,9 @@ public class SGFParser {
         }
 
         // Add LZ specific data to restore on next load
-        if (Lizzie.config.holdBestMovesToSgf) {
-          builder.append(String.format("LZ[%s]", formatNodeData(node)));
-        }
+        //        if (Lizzie.config.holdBestMovesToSgf) {
+        //          builder.append(String.format("LZ[%s]", formatNodeData(node)));
+        //        }
       }
 
       if (node.numberOfChildren() > 1) {
