@@ -37,12 +37,7 @@ import java.awt.TexturePaint;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -807,6 +802,28 @@ public class BoardRenderer {
     float cyanHue = Color.RGBtoHSB(0, 255, 255, null)[0];
 
     if (bestMoves != null && !bestMoves.isEmpty()) {
+
+      bestMoves.sort(
+          (m1, m2) -> {
+            int cmpCoord = m1.coordinate.compareTo(m2.coordinate);
+            if (cmpCoord != 0) {
+              return cmpCoord;
+            }
+            return (int) (-10000 * (m1.winrate - m2.winrate));
+          });
+      System.out.printf("Before: %s\n", bestMoves);
+      int index = 0;
+      Set<String> seenCoord = new HashSet<>();
+      while (index < bestMoves.size()) {
+        MoveData move = bestMoves.get(index);
+        if (!seenCoord.contains(move.coordinate)) {
+          seenCoord.add(move.coordinate);
+          index++;
+        } else {
+          bestMoves.remove(index);
+        }
+      }
+      System.out.printf("After:  %s\n", bestMoves);
 
       int maxPlayouts = 0;
       double maxWinrate = 0;

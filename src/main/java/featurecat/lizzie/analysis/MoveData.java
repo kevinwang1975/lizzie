@@ -17,6 +17,11 @@ public class MoveData {
   public double scoreStdev;
   public double policy;
 
+  @Override
+  public String toString() {
+    return String.format("[%s, %f]", coordinate, winrate);
+  }
+
   private MoveData() {}
 
   /**
